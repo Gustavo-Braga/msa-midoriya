@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Msa.Employee.Domain.Dto;
 using Msa.Employee.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Msa.Employee.Api.Controllers
@@ -18,12 +16,11 @@ namespace Msa.Employee.Api.Controllers
             _employeeService = employeeService;
         }
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpPost]
+        public async Task<IActionResult> Get([FromBody] EmployeeRequest request)
         {
             await Task.CompletedTask;
-            return Ok(_employeeService.Insert(id));
+            return Ok(await _employeeService.Insert(request));
         }
     }
 }
